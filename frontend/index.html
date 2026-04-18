@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Scam Detector</title>
+</head>
+<body style="font-family: Arial; text-align: center; margin-top: 50px;">
+
+<h2>🤖 AI Scam Detector</h2>
+
+<textarea id="msg" rows="5" cols="40" placeholder="Paste message here"></textarea>
+<br><br>
+
+<button onclick="checkScam()">Check</button>
+
+<h3 id="result"></h3>
+
+<script>
+function checkScam() {
+    let message = document.getElementById("msg").value;
+
+    fetch("http://127.0.0.1:5000/check", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({message: message})
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("result").innerText = data.result;
+    });
+}
+</script>
+
+</body>
+</html>
